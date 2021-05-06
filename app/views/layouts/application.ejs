@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OBECA</title>
+    <link rel="stylesheet" href="/css/application.css">
+    <script language="javascript" src="/jquery.min.js"></script>
+    <script type="module" src="player-chrome.js"></script>
+</head>
+<body class="" data-rp-api="<%= global.rp_api %>">
+    <div class="wrapper">
+        <%- include('_header.ejs') %>
+    <div class="container">
+        <%- body %>
+    </div>
+        <%- include('_footer.ejs') %>
+    </div>
+    <script language="javascript" src="/js/bootstrap.min.js"></script>
+</body>
+</html>

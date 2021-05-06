@@ -1,0 +1,179 @@
+<div class="row m-3">
+  <div class="col-lg-4">
+    <div class="box pb-2">
+      <div class="box-title">
+        SDR
+      </div>
+      <table class="params-table">
+        <tbody>
+          <tr>
+            <td>Frequency</td>
+            <td class="pr-3"><input id="sdr-freq" class="text-right" type="number" step="0.1"></td>
+            <td>MHz</td>
+          </tr>
+          <tr>
+            <td>Gain</td>
+            <td class="pr-3"><input id="sdr-gain" class="text-right" type="number" step="1"/></td>
+            <td>dB</td>
+          </tr>
+          <tr>
+            <td>Antenna</td>
+            <td class="pr-3 text-right val" id="sdr-antenna"></td>
+            <td></td>
+          </tr>
+          <tr>
+            <td>Sample Rate</td>
+            <td class="pr-3 text-right val" id="sdr-sample-rate"></td>
+            <td>MHz</td>
+          </tr>
+          <tr>
+            <td>Filter BW</td>
+            <td class="pr-3 text-right val" id="sdr-filter-bw"></td>
+            <td>MHz</td>
+          </tr>
+          <tr>
+            <td>Buffer Level</td>
+            <td colspan="2" class="pr-3 text-right">
+              <div class="progress">
+                <div class="progress-bar" role="progressbar" id="sdr-bufferlevel"></div>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <canvas height="121" id="sdr-carriers"></canvas>
+      <table class="carrier-labels">
+        <tr>
+          <td id="carriers-lower">-2.5</div>
+          <td id="carriers-center"></div>
+          <td id="carriers-upper">-2.5</div>
+        </tr>
+      </table>
+    </div>
+    <div class="box pb-2 mt-3">
+      <div class="box-title">
+        SYNC
+      </div>
+      <table class="params-table">
+        <tbody>
+          <tr>
+            <td>Status</td>
+            <td class="pr-3 text-right val" id="sync-status"></td>
+            <td></td>
+          </tr>
+          <tr>
+            <td>CFO</td>
+            <td class="pr-3 text-right val" id="sync-cfo"></td>
+            <td>kHz</td>
+          </tr>
+          <tr>
+            <td>Cell ID</td>
+            <td class="pr-3 text-right val" id="sync-cell-id"></td>
+            <td></td>
+          </tr>
+          <tr>
+            <td>PRB</td>
+            <td class="pr-3 text-right val" id="sync-prb"></td>
+            <td></td>
+          </tr>
+          <tr>
+            <td>Width</td>
+            <td class="pr-3 text-right val" id="sync-width"></td>
+            <td>MHz</td>
+          </tr>
+          <tr>
+            <td>Subcarrier Spacing</td>
+            <td class="pr-3 text-right val" id="sync-scs"></td>
+            <td>kHz</td>
+          </tr>
+          <tr>
+            <td>CINR</td>
+            <td class="pr-3 text-right val" id="sync-cinr"></td>
+            <td>dB</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div class="col-lg-4">
+    <div class="box pb-2">
+      <div class="box-title">
+        PDSCH
+      </div>
+      <canvas id="pdsch-constellation" class="constellation" ></canvas>
+      <table class="params-table">
+        <tbody>
+          <tr>
+            <td>MCS</td>
+            <td class="pr-3 text-right val" id="pdsch-mcs"></td>
+            <td>BLER</td>
+            <td class="pr-3 text-right val" id="pdsch-bler"></td>
+            <td>BER</td>
+            <td class="pr-3 text-right val" id="pdsch-ber"></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="box pb-2 mt-3">
+      <div class="box-title">
+        PMCH
+      </div>
+      <div id="mch-idx" class="box-subtitle">
+        MCH -
+      </div>
+      <canvas id="mch-constellation" class="constellation"></canvas>
+      <table class="params-table">
+        <tbody>
+          <tr>
+            <td>MCS</td>
+            <td class="pr-3 text-right val" id="mch-mcs"></td>
+            <td>BLER</td>
+            <td class="pr-3 text-right val" id="mch-bler"></td>
+            <td>BER</td>
+            <td class="pr-3 text-right val" id="mch-ber"></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div class="col-lg-4">
+    <div class="box pb-2">
+      <div class="box-title">
+        PMCH
+      </div>
+      <div class="box-subtitle">
+        MCCH
+      </div>
+      <canvas id="mcch-constellation" class="constellation" ></canvas>
+      <table class="params-table">
+        <tbody>
+          <tr>
+            <td>MCS</td>
+            <td class="pr-3 text-right val" id="mcch-mcs"></td>
+            <td>BLER</td>
+            <td class="pr-3 text-right val" id="mcch-bler"></td>
+            <td>BER</td>
+            <td class="pr-3 text-right val" id="mcch-ber"></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="box pb-2 mt-3">
+      <div class="box-title">
+        SERVICES
+      </div>
+      <table class="rp-services-table">
+        <tbody id="rp-services-tbody">
+          <tr>
+            <td>
+              <button>⛚</button>
+            </td>
+            <td>MCH 0</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<script language="javascript" src="/js/receiver.js"></script>

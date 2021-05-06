@@ -1,0 +1,118 @@
+.navbar {
+  .navbar-brand {
+    font-weight: bold;
+    span {
+      font-size: 12px;
+      font-weight: 200;
+      color: #ccc;
+      margin-left: 10px;
+    }
+  }
+  .app-version {
+    font-size: 12px;
+    font-weight: 200;
+    margin-left: 5px;
+    color: #ccc;
+  }
+}
+
+.box {
+  border: 1px solid #444;
+  background: #1e1e1e;
+  padding: 5px 14px;
+  position: relative;
+  .box-title {
+    display: inline-block;
+    font-size: 18px;
+    font-weight: bold;
+  }
+  .box-subtitle {
+    right: 14px;
+    position: absolute;
+    display: inline-block;
+    font-size: 18px;
+  }
+  .params-table {
+    width: 100%;
+    .val {
+      font-weight: bold;
+    }
+    input {
+      width: 100%;
+      background: #333;
+      color: #fff;
+    }
+    .progress-bar {
+      background-color: #0c0;
+    }
+  }
+  .rp-services-table {
+    width: 100%;
+    button {
+      background: transparent;
+      color: #0c0;
+      margin-right: 0.2em;
+      margin-top: 0.5em;
+    }
+    .mtch-first {
+      border-top: 1px solid #333;
+      margin-top: 1em;
+    }
+    .mtch-row {
+      margin-bottom: 0.5em;
+      border-bottom: 1px solid #333;
+    }
+  }
+}
+
+#sdr-carriers {
+}
+.carrier-labels {
+  width: 100%;
+  td {
+    width: 33%;
+    text-align: center;
+  }
+  #carriers-lower {
+    padding-left: 8%;
+  }
+  #carriers-upper {
+    padding-right: 4%;
+  }
+}
+
+#sync-status:first-letter {
+    text-transform:capitalize;
+}
+
+.constellation {
+}
+
+/* 16:9 */
+.video-container {
+  width: 100%;
+  padding-top: 56.25%;
+  height: 0px;
+  position: relative;
+  #video {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+}
+
+#gw-services {
+  .play-button {
+    position: absolute;
+    right: 8px;
+    top: 8px;
+    font-size: 40px;
+    line-height: 40px;
+    padding: 0;
+    width: 60px;
+    height: 60px;
+    color: white;
+  }
+}
