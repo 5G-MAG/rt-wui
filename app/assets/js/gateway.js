@@ -12,14 +12,18 @@ function poll(){
       files.sort((a, b) => (a.age > b.age) ? 1 : -1)
       let tb = $("#gw-files-tbody");
       tb.empty();
+      let total_size = 0;
       for(let file of files) {
         let row = $("<tr>");
         row.append($("<td>").text(file.age));
-        row.append($("<td>").text(file.filename));
-        row.append($("<td>").html("<a target='_blank' href='/f" + file.location + "'>" + file.location + "</a>"));
+        row.append($("<td>").text(file.tmgi));
+        row.append($("<td>").html("<a target='_blank' href='/f/" + file.tmgi + "/" + file.location + "'>" + file.location + "</a>"));
         row.append($("<td>").text(human_file_size(file.content_length)));
+        row.append($("<td>").text(file.access_count));
         tb.append(row);  
+        total_size += file.content_length;
       }
+      $("#total-cache-size").text(human_file_size(total_size) + " total");
 
       $.get("/api/gw/services", function(data){
         if (window.gw_services && window.gw_services == data) {
