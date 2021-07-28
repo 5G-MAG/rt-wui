@@ -7286,3 +7286,7 @@ a.text-dark:hover, a.text-dark:focus {
   width: 60px;
   height: 60px;
   color: white; }
+
+.subtitle-sm {
+  font-size: 0.7em;
+  font-weight: normal; }
