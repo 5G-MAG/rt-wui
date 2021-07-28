@@ -3,7 +3,6 @@ const express = require('express'),
   routes = require('./app/routes'),
   cors = require('cors'),
   bodyParser = require('body-parser'),
-  sassMiddleware = require('node-sass-middleware'),
   app = express();
 
 app.use(expressLayouts);
@@ -14,12 +13,6 @@ app.use(bodyParser.urlencoded({
     extended: true
 }));
 app.use(bodyParser.json());
-app.use(
-  sassMiddleware({
-    src: __dirname + '/app/assets',
-    dest: __dirname + '/public'
-  })
-);
 app.use(cors());
 
 app.use(express.static(__dirname + '/node_modules/bootstrap/dist'));
