@@ -1,8 +1,9 @@
 # Installation guide
-Installation of OBECA *Webinterface* consists of 3 Steps:
+Installation of OBECA *Webinterface* consists of 4 Steps:
 1. Install dependencies
 2. Building the *Webinterface*
 3. Post installation configuration
+4. Run the *Webinterface*
 
 > The build was tested and verified on Ubuntu 20.04 LTS (64 bit).
 
@@ -13,7 +14,7 @@ sudo apt update
 sudo apt install npm nginx
 ````
 
-## Step 2: Building the Webinterface
+## Step 2: Building the *Webinterface*
 ### 2.1 Getting the source code
 ````
 cd ~
@@ -45,3 +46,6 @@ After creating the symbolic links, nginx has to be restarted. To always have the
 sudo systemctl restart nginx.service
 sudo systemctl enable nginx.service
 ````
+
+## Step 4: Run the *Webinterface*
+After installing, make sure to follow the instructions in the *OBECA-Info* repository to [run the *OBECA Webinterface*](https://github.com/Austrian-Broadcasting-Services/obeca-info/wiki/Webinterface#run-the-webinterface).
