@@ -18,7 +18,7 @@ sudo apt install npm nginx
 ### 2.1 Getting the source code
 ````
 cd ~
-git clone --recurse-submodules git@github.com:Austrian-Broadcasting-Services/obeca-web-interface.git
+git clone https://github.com/5G-MAG/obeca-web-interface.git
 ````
 > **_NOTE:_** You need to have a GitHub user with a private/public key pair to clone the repository. For more details on private/public key go to your GitHub account -> Settings -> SSH and GPG keys 
 
