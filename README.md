@@ -20,7 +20,6 @@ sudo apt install npm nginx
 cd ~
 git clone https://github.com/5G-MAG/rt-wui
 ````
-> **_NOTE:_** You need to have a GitHub user with a private/public key pair to clone the repository. For more details on private/public key go to your GitHub account -> Settings -> SSH and GPG keys 
 
 ### 2.2 Installing
 ````
