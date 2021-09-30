@@ -40,7 +40,7 @@ sudo rm default
 ````
 
 ### 3.2 Restart and enable autostart for nginx
-After creating the symbolic links, nginx has to be restarted. To always have the Webinterface available at startup, you can enable autostart via systmctl:
+After creating the symbolic links, nginx has to be restarted. To always have the Webinterface available at startup, you can enable autostart via systemctl:
 ````
 sudo systemctl restart nginx.service
 sudo systemctl enable nginx.service
