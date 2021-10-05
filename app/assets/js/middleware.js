@@ -4,7 +4,7 @@ function human_file_size(size) {
 };
 
 function poll(){
-  $.get("/api/gw/files")
+  $.get("/api/mw/files")
     .done( function(data, textStatus, xhr){
       $("#gateway-running").show();
       $("#gateway-not-running").hide();
@@ -25,7 +25,7 @@ function poll(){
       }
       $("#total-cache-size").text(human_file_size(total_size) + " total");
 
-      $.get("/api/gw/services", function(data){
+      $.get("/api/mw/services", function(data){
         if (window.gw_services && window.gw_services == data) {
           return;
         }
