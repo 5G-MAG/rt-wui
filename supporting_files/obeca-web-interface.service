@@ -1,11 +1,11 @@
 [Unit]
-Description=Web interface service for OBECA
+Description=Web interface service for 5G-MAG Reference Tools
 After=network.target
 
 [Service]
 Type=simple
 User=ofr
-ExecStart=/usr/bin/node /home/ofr/workspace/obeca-web-interface/app.js
+ExecStart=/usr/bin/node /home/user-name/rt-wui/app.js
 Restart=on-failure
 
 [Install]
