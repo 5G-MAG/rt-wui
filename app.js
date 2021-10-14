@@ -26,15 +26,15 @@ app.use(routes);
 
 const
       { spawnSync } = require( 'child_process' ),
-      rp_version = spawnSync( 'rp', ['--version'] );
-      gw_version = spawnSync( 'gw', ['--version'] );
+      modem_version = spawnSync( 'modem', ['--version'] );
+      mw_version = spawnSync( 'mw', ['--version'] );
 
 global.versions = { 
-  rp: rp_version.status == 0 ? "v" + rp_version.stdout.toString() : "n/a",
-  gw: gw_version.status == 0 ? "v" + gw_version.stdout.toString() : "n/a"
+  modem: modem_version.status == 0 ? "v" + modem_version.stdout.toString() : "n/a",
+  mw: mw_version.status == 0 ? "v" + mw_version.stdout.toString() : "n/a"
 };
-global.rp_api = ":3010/rp-api/"
-global.gw_api = ":3020/gw-api/"
+global.modem_api = ":3010/modem-api/"
+global.mw_api = ":3020/mw-api/"
 
 app.set('port', process.env.PORT || 3000);
 app.listen(app.get('port'));

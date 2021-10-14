@@ -28,32 +28,32 @@ function proxy_call(req, res, path) {
 }
 
 exports.sdr_params = async(function*(req, res) {
-  proxy_call(req, res, "/rp-api/sdr_params");
+  proxy_call(req, res, "/modem-api/sdr_params");
 });
 exports.status = async(function*(req, res) {
-  proxy_call(req, res, "/rp-api/status");
+  proxy_call(req, res, "/modem-api/status");
 });
 exports.ce_values = async(function*(req, res) {
-  proxy_call(req, res, "/rp-api/ce_values");
+  proxy_call(req, res, "/modem-api/ce_values");
 });
 exports.pdsch_data = async(function*(req, res) {
-  proxy_call(req, res, "/rp-api/pdsch_data");
+  proxy_call(req, res, "/modem-api/pdsch_data");
 });
 exports.pdsch_status = async(function*(req, res) {
-  proxy_call(req, res, "/rp-api/pdsch_status");
+  proxy_call(req, res, "/modem-api/pdsch_status");
 });
 exports.mcch_data = async(function*(req, res) {
-  proxy_call(req, res, "/rp-api/mcch_data");
+  proxy_call(req, res, "/modem-api/mcch_data");
 });
 exports.mcch_status = async(function*(req, res) {
-  proxy_call(req, res, "/rp-api/mcch_status");
+  proxy_call(req, res, "/modem-api/mcch_status");
 });
 exports.mch_info = async(function*(req, res) {
-  proxy_call(req, res, "/rp-api/mch_info");
+  proxy_call(req, res, "/modem-api/mch_info");
 });
 exports.mch_data = async(function*(req, res) {
-  proxy_call(req, res, "/rp-api/mch_data/"+req.params["id"]);
+  proxy_call(req, res, "/modem-api/mch_data/"+req.params["id"]);
 });
 exports.mch_status = async(function*(req, res) {
-  proxy_call(req, res, "/rp-api/mch_status/"+req.params["id"]);
+  proxy_call(req, res, "/modem-api/mch_status/"+req.params["id"]);
 });
