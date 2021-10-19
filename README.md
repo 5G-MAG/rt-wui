@@ -31,11 +31,11 @@ npm install
 As a last step you have to enable the nginx site, to allow requests to the 5G-MAG Reference Tools Webinterface over http.
 
 ### 3.1 Creating a symbolic link
-Change to the sites-enabled directory and create a symbolic link from the obeca file in sites-available. After that, delete the default sym link:
+Change to the sites-enabled directory and create a symbolic link from the rt-wui file in sites-available. After that, delete the default sym link:
 
 ````
 cd /etc/nginx/sites-enabled
-sudo ln -s ../sites-available/obeca obeca
+sudo ln -s ../sites-available/rt-wui rt-wui
 sudo rm default
 ````
 
