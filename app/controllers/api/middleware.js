@@ -28,8 +28,8 @@ function proxy_call(req, res, path) {
 }
 
 exports.files = async(function*(req, res) {
-  proxy_call(req, res, "/gw-api/files");
+  proxy_call(req, res, "/mw-api/files");
 });
 exports.services = async(function*(req, res) {
-  proxy_call(req, res, "/gw-api/services");
+  proxy_call(req, res, "/mw-api/services");
 });

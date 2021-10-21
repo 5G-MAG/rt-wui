@@ -1,6 +1,6 @@
 function load_ce_values(canvas_id) {
   var xhr = new XMLHttpRequest();
-  xhr.open('GET', '/api/rp/ce_values', true);
+  xhr.open('GET', '/api/modem/ce_values', true);
   xhr.responseType = 'arraybuffer';
   xhr.onload = function(e) {
     const ce = new Float32Array(this.response);
@@ -108,7 +108,7 @@ function clear_all() {
   clear_constellation_values("mch-constellation");
   window.selected_mch = 0;
   window.mch_info = [];
-  $("#rp-services-tbody").empty();
+  $("#modem-services-tbody").empty();
 }
 
 function updateMchButtons() {
@@ -123,10 +123,10 @@ function updateMchButtons() {
 }
 
 function poll(){
-  let rp_present = false;
-  $.get("/api/rp/status")
+  let modem_present = false;
+  $.get("/api/modem/status")
     .done( function(data, textStatus, xhr){
-      rp_present = true;
+      modem_present = true;
       const d = JSON.parse(data);
       $("#sync-status").html(d["state"]);
       $("#sync-cfo").html((Number.parseFloat(d["cfo"])/1000.0).toFixed(3));
@@ -139,7 +139,7 @@ function poll(){
       $("#sync-scs").html(Number.parseFloat(d["subcarrier_spacing"]));
       $("#sync-cinr").html(Number.parseFloat(d["cinr_db"]).toFixed(2));
 
-      $.get("/api/rp/sdr_params", function(data){
+      $.get("/api/modem/sdr_params", function(data){
         const d = JSON.parse(data);
         if (!$("#sdr-freq").is(":focus")) {
           $("#sdr-freq").val((Number.parseFloat(d["frequency"])/1000000).toFixed(2));
@@ -155,14 +155,14 @@ function poll(){
       }); 
 
 
-      $.get("/api/rp/mch_info", function(data){
+      $.get("/api/modem/mch_info", function(data){
         if (window.mch_info && window.mch_info == data) {
           return;
         }
         console.log("Received new MCH info");
         window.mch_info = data;
         const d = JSON.parse(data);
-        let tb = $("#rp-services-tbody");
+        let tb = $("#modem-services-tbody");
         tb.empty();
         for(let [idx, mch] of d.entries()) {
           let b = $("<button class='mch-button'>").data("mch-idx", idx).text("⛚");
@@ -187,19 +187,19 @@ function poll(){
 
       }); 
 
-      $.get("/api/rp/pdsch_status", function(data){
+      $.get("/api/modem/pdsch_status", function(data){
         const d = JSON.parse(data);
         $("#pdsch-mcs").html(Number.parseFloat(d["mcs"]).toString());
         $("#pdsch-ber").html(Number.parseFloat(d["ber"]).toFixed(3).toString());
         $("#pdsch-bler").html(Number.parseFloat(d["bler"]).toFixed(3).toString());
       }); 
-      $.get("/api/rp/mcch_status", function(data){
+      $.get("/api/modem/mcch_status", function(data){
         const d = JSON.parse(data);
         $("#mcch-mcs").html(Number.parseFloat(d["mcs"]).toString());
         $("#mcch-ber").html(Number.parseFloat(d["ber"]).toFixed(3).toString());
         $("#mcch-bler").html(Number.parseFloat(d["bler"]).toFixed(3).toString());
       }); 
-      $.get("/api/rp/mch_status/" + window.selected_mch, function(data){
+      $.get("/api/modem/mch_status/" + window.selected_mch, function(data){
         const d = JSON.parse(data);
         $("#mch-mcs").html(Number.parseFloat(d["mcs"]).toString());
         $("#mch-ber").html(Number.parseFloat(d["ber"]).toFixed(3).toString());
@@ -208,9 +208,9 @@ function poll(){
       }); 
 
       load_ce_values("sdr-carriers");
-      load_constellation_values("pdsch-constellation", "/api/rp/pdsch_data");
-      load_constellation_values("mcch-constellation", "/api/rp/mcch_data");
-      load_constellation_values("mch-constellation", "/api/rp/mch_data/" + window.selected_mch);
+      load_constellation_values("pdsch-constellation", "/api/modem/pdsch_data");
+      load_constellation_values("mcch-constellation", "/api/modem/mcch_data");
+      load_constellation_values("mch-constellation", "/api/modem/mch_data/" + window.selected_mch);
   })
     .fail( function(data, textStatus, xhr){
       clear_all();
@@ -224,7 +224,7 @@ $(function() {
   $("#sdr-freq").on('change', function () {
     let new_freq = $(this).val() * 1000000;
     console.log("freq set to " + new_freq);
-    $.ajax( "/api/rp/sdr_params", {
+    $.ajax( "/api/modem/sdr_params", {
       data: JSON.stringify({ frequency: new_freq }),
       contentType: "application/json",
       type: "PUT"
@@ -233,7 +233,7 @@ $(function() {
   $("#sdr-gain").on('change', function () {
     let new_gain = $(this).val() * 1.0;
     console.log("gain set to " + new_gain);
-    $.ajax( "/api/rp/sdr_params", {
+    $.ajax( "/api/modem/sdr_params", {
       data: JSON.stringify({ gain: new_gain }),
       contentType: "application/json",
       type: "PUT"

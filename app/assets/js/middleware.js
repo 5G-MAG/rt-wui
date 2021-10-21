@@ -4,13 +4,13 @@ function human_file_size(size) {
 };
 
 function poll(){
-  $.get("/api/gw/files")
+  $.get("/api/mw/files")
     .done( function(data, textStatus, xhr){
-      $("#gateway-running").show();
-      $("#gateway-not-running").hide();
+      $("#middleware-running").show();
+      $("#middleware-not-running").hide();
       let files = JSON.parse(data);
       files.sort((a, b) => (a.age > b.age) ? 1 : -1)
-      let tb = $("#gw-files-tbody");
+      let tb = $("#mw-files-tbody");
       tb.empty();
       let total_size = 0;
       for(let file of files) {
@@ -25,14 +25,14 @@ function poll(){
       }
       $("#total-cache-size").text(human_file_size(total_size) + " total");
 
-      $.get("/api/gw/services", function(data){
-        if (window.gw_services && window.gw_services == data) {
+      $.get("/api/mw/services", function(data){
+        if (window.mw_services && window.mw_services == data) {
           return;
         }
-        window.gw_services = data;
+        window.mw_services = data;
         let services = JSON.parse(data);
         console.log(services);
-        let cont = $("#gw-services");
+        let cont = $("#mw-services");
         cont.empty();
         for(let service of services) {
           console.log(service);
@@ -70,13 +70,13 @@ function poll(){
       });
     })
     .fail( function(data, textStatus, xhr){
-      $("#gateway-running").hide();
-      $("#gateway-not-running").show();
+      $("#middleware-running").hide();
+      $("#middleware-not-running").show();
     });
 }
 
 $(function() {
-  $("#gateway-running").hide();
+  $("#middleware-running").hide();
   window.selected_mch = 0;
   setInterval(poll, 300);
 });
