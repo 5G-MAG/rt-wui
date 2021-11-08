@@ -1,9 +1,30 @@
+
+class hls_fragment_loader extends Hls.DefaultConfig.loader {
+  constructor(config) {
+    super(config);
+    var load = this.load.bind(this);
+    this.load = function (context, config, callbacks) {
+        var onSuccess = callbacks.onSuccess;
+        callbacks.onSuccess = function (response, stats, context, networkDetails) {
+          let origin = networkDetails.getResponseHeader("RT-MBMS-MW-File-Origin");
+          $('#data-source-info').html(origin);
+          onSuccess(response, stats, context);
+        };
+      load(context, config, callbacks);
+    };
+  }
+}
+
 function playHls(manifest_url)
 {
   if (Hls.isSupported()) {
     let video = document.getElementById('video');
     video.muted = true;
-    video.hls = new Hls();
+    video.hls = new Hls({
+      fLoader: hls_fragment_loader,
+      lowLatencyMode: false,
+      fragLoadingRetryDelay: 50
+    });
     video.hls.attachMedia(video);
     video.hls.on(Hls.Events.MEDIA_ATTACHED, function () {
       console.log('video and hls.js are now bound together !');
@@ -35,8 +56,7 @@ function stop()
 
 function autodetectFormat(tmgi)
 {
-  let uri = "/f/" + tmgi;
-  let index = uri + "/index.m3u8";
+  let index = "/index.m3u8";
   $.get(index)
     .done( function(data, textStatus, xhr){
       $("#src-url").val(index);
@@ -54,6 +74,7 @@ function autodetectFormat(tmgi)
     });
 }
 
+
 $(function() {
   let vi = $("#video-info");
   let manifest = vi.data("manifest");
@@ -62,6 +83,10 @@ $(function() {
   if (tmgi) {
     autodetectFormat(tmgi);
   }
+
+  $(document).ajaxComplete(function(e, xhr) {
+    console.log('it worked, and the response was:' + xhr.status);
+  });
 
   if (manifest && mp) {
     $("#src-url").val(manifest);

@@ -1,48 +1,39 @@
-
-<div class="row m-3" id="gateway-not-running">
+<div class="row m-3" id="middleware-not-running">
   <div class="col-lg-12">
     <div class="box pb-2">
       <div class="box-title">
-        Gateway process is not running
+        Middleware process is not running
       </div>
     </div>
   </div>
 </div>
 
-<div id="gateway-running">
-  <div id="gw-services">
-    <div class="col-lg-12">
-      <div class="box pb-2">
-        <div class="box-title">
-          Service Announcement
-        </div>
-      </div>
-    </div>
-  </div>
+<div id="middleware-running">
+  <ul class="ml-3 mr-3 mt-3 nav nav-tabs nav-dark" id="gateway-tab">
+    <li class="nav-item">
+      <a class="nav-link active" id="services-tab" href="#services" data-toggle="tab">Services</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" id="cache-tab" href="#cache" data-toggle="tab">Cache</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" id="sa-tab" href="#sa" data-toggle="tab">Service Announcement</a>
+    </li>
+  </ul>
 
-  <div class="row m-3">
-    <div class="col-lg-12">
-      <div class="box pb-2">
-        <div class="box-title mb-2">
-          Files
-          <span id="total-cache-size" class="subtitle-sm">123123</div>
-        </div>
-        <table class="gw-files-table table table-sm table-dark">
-          <thead>
-            <tr>
-              <th>Age [sec]</th>
-              <th>TMGI</th>
-              <th>Location</th>
-              <th>Size</th>
-              <th>Access count</th>
-            </tr>
-          </thead>
-          <tbody id="gw-files-tbody">
-          </tbody>
-        </table>
-      </div>
+  <div class="tab-content" id="gw-tab-content">
+    <div class="tab-pane fade show active" id="services">
+      TBD
+    </div>
+    <div class="tab-pane fade" id="sa">
+      <%- include('_service_announcement.ejs') %>
+    </div>
+    <div class="tab-pane fade" id="cache">
+      <%- include('_cache.ejs') %>
     </div>
   </div>
 </div>
 
-<script language="javascript" src="/js/middleware.js"></script>
+
+<script language="javascript" src="js/middleware.js"></script>
+<script language="javascript" src="prism/prism.js" data-manual></script>

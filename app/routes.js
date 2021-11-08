@@ -6,7 +6,7 @@ const application = require('./controllers/application');
 
 var router = require('express').Router()
 
-router.get('/', function(req, res) { res.redirect("/modem"); });
+router.get('/', function(req, res) { res.redirect("/modem/"); });
 
 router.get('/modem', modem.index);
 router.get('/middleware', middleware.index);
@@ -27,4 +27,5 @@ router.get('/api/modem/mch_status/:id', modem_api.mch_status);
 
 router.get('/api/mw/files', middleware_api.files);
 router.get('/api/mw/services', middleware_api.services);
+router.get('/api/mw/service_announcement', middleware_api.service_announcement);
 module.exports = router
