@@ -1,7 +1,7 @@
 {
-  "name": "obeca-web-interface",
-  "version": "0.0.9",
-  "description": "Shared web interface for the OBECA processes: receiver, gateway and application",
+  "name": "rt-wui",
+  "version": "0.0.10",
+  "description": "Shared web interface for the 5G-MAG processes: modem and middleware",
   "main": "app.js",
   "dependencies": {
     "@fortawesome/fontawesome-free": "^5.15.4",
@@ -28,12 +28,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Austrian-Broadcasting-Services/obeca-web-interface"
+    "url": "git+https://github.com/5G-MAG/rt-wui"
   },
   "author": "Klaus Kuehnhammer (Österreichische Rundfunksender GmbH & Co KG)",
   "license": "5G-MAG",
   "bugs": {
-    "url": "https://github.com/Austrian-Broadcasting-Services/obeca-web-interface/issues"
+    "url": "https://github.com/5G-MAG/rt-wui/issues"
   },
-  "homepage": "https://github.com/Austrian-Broadcasting-Services/obeca-info/wiki"
+  "homepage": "https://github.com/5G-MAG/Documentation-and-Architecture/wiki/Webinterface"
 }

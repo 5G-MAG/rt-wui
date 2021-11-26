@@ -108,7 +108,7 @@ function clear_all() {
   clear_constellation_values("mch-constellation");
   window.selected_mch = 0;
   window.mch_info = [];
-  $("#rp-services-tbody").empty();
+  $("#modem-services-tbody").empty();
 }
 
 function updateMchButtons() {
@@ -123,10 +123,8 @@ function updateMchButtons() {
 }
 
 function poll(){
-  let rp_present = false;
   $.get("/api/modem/status")
     .done( function(data, textStatus, xhr){
-      rp_present = true;
       const d = JSON.parse(data);
       $("#sync-status").html(d["state"]);
       $("#sync-cfo").html((Number.parseFloat(d["cfo"])/1000.0).toFixed(3));
@@ -162,7 +160,7 @@ function poll(){
         console.log("Received new MCH info");
         window.mch_info = data;
         const d = JSON.parse(data);
-        let tb = $("#rp-services-tbody");
+        let tb = $("#modem-services-tbody");
         tb.empty();
         for(let [idx, mch] of d.entries()) {
           let b = $("<button class='mch-button'>").data("mch-idx", idx).text("⛚");
