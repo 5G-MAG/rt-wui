@@ -79,18 +79,10 @@ $(function() {
   let vi = $("#video-info");
   let manifest = vi.data("manifest");
   let mp = vi.data("player");
-  let tmgi = vi.data("tmgi");
-  if (tmgi) {
-    autodetectFormat(tmgi);
-  }
-
-  $(document).ajaxComplete(function(e, xhr) {
-    console.log('it worked, and the response was:' + xhr.status);
-  });
 
   if (manifest && mp) {
     $("#src-url").val(manifest);
-    $("#player-select").val(mp);
+    $("#player-select").val(mp.toLowerCase());
     // autoplay
     if (mp == "hls") {
       playHls(manifest);

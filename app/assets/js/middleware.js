@@ -61,7 +61,9 @@ function poll(){
     check_sa_support();
   }
 
-  read_sa();
+  if (sa_supported) {
+    read_sa();
+  }
 
   $.get("/api/mw/files")
     .done( function(data, textStatus, xhr){
@@ -74,59 +76,61 @@ function poll(){
       let total_size = 0;
       for(let file of files) {
         let row = $("<tr>");
-        row.append($("<td>").text(file.age));
-        row.append($("<td>").html("<a target='_blank' href='/f/" + file.tmgi + "/" + file.location + "'>" + file.location + "</a>"));
-        row.append($("<td>").text(human_file_size(file.content_length)));
-        row.append($("<td>").text(file.source));
+        row.append($("<td>").text(file.age === 10000 ? "—" : file.age));
+        row.append($("<td>").html("<a target='_blank' href='/" + file.location + "'>" + file.location + "</a>"));
+        row.append($("<td>").text(file.content_length == 0 ? "—" : human_file_size(file.content_length)));
+        row.append($("<td>").text(file.source == "-" ? "—" : file.source));
         row.append($("<td>").text(file.access_count));
         tb.append(row);  
         total_size += file.content_length;
       }
       $("#total-cache-size").text(human_file_size(total_size) + " total");
 
-      return;
       $.get("/api/mw/services", function(data){
         if (window.gw_services && window.gw_services == data) {
           return;
         }
         window.gw_services = data;
         let services = JSON.parse(data);
-        console.log(services);
-        let cont = $("#gw-services");
-        cont.empty();
-        for(let service of services) {
-          console.log(service);
-          let row = $("<div class='row m-3'>");
-          let col = $("<div class='col-lg-12'>");
-          let box = $("<div class='box pb-2'>");
-          let title = $("<div class='box-title'>").text(service.service_name);
-          box.append(title);
-          let tmgi = parseInt(service.service_tmgi, 16);
-          let p = $("<p class='mb-0'>").html("Service announcement TMGI: <strong>0x" + tmgi.toString(16) + "</strong>");
-          box.append(p);
-          p = $("<p class='mb-0'>").html("Stream type: <strong>" + service.stream_type + "</strong>");
-          box.append(p);
-          p = $("<p class='mb-0'>").html("Stream multicast: <strong>" + service.stream_mcast + "</strong>");
-          box.append(p);
-          let url = "";
-          if (service.stream_type=="FLUTE/UDP") {
-            url = "/application?s="+service.stream_tmgi;
-            let stmgi = parseInt(service.stream_tmgi, 16);
-            p = $("<p class='mb-0'>").html("Stream TMGI: <strong>0x" + stmgi.toString(16) + "</strong>");
-            box.append(p);
-          } else {
-            url = "udp://@"+service.stream_mcast;
+
+        $("#services-holder").empty();
+        for (let service of services ) {
+          var s = $('#service-template').clone();
+          s.attr("id", null);
+          s.show();
+
+          for (let n of service.names) {
+            let t = $("<div class='service-title'>");
+            t.text(" " + n.name + " ");
+            let st = $("<span class='service-title-lang'>");
+            st.text(n.lang);
+            t.append(st);
+            s.find(".service-titles").append(t);
+            s.find(".ser-play-link").attr("href", 
+              "application?p=" + service.protocol + "&m=" + encodeURIComponent("/"+service.manifest_path));
           }
-          let pa = $("<a href='"+url+"'>");
-          let pb = $("<button class='bg-dark play-button'>").html("▷");
-          pa.append(pb);
-          box.append(pa);
 
+          for (let st of service.streams) {
+            var ss = s.find('#service-stream-template').clone();
+            ss.attr("id", null);
+            ss.show();
+            ss.find(".ser-stream-type").text(st.type);
+            ss.find(".ser-stream-delivery").text(service.protocol);
+            ss.find(".ser-stream-flute").text(st.flute_info);
+            ss.find(".ser-stream-cdn").text(st.cdn_ept);
+            ss.find(".ser-stream-bw").text(st.bandwidth);
+            ss.find(".ser-stream-resolution").text(st.resolution);
+            ss.find(".ser-stream-rate").text(st.frame_rate);
+            ss.find(".ser-stream-codecs").text(st.codecs);
+            ss.find(".ser-stream-play-link").attr("href", 
+              "application?p=" + service.protocol + "&m=" + encodeURIComponent("/"+st.playlist_path));
 
-          col.append(box);
-          row.append(col);
-          cont.append(row);
+            s.find(".service-streams").append(ss);
+          }
+
+          $("#services-holder").append(s);
         }
+
       });
     })
     .fail( function(data, textStatus, xhr){
