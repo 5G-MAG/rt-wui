@@ -35,7 +35,7 @@ Change to the sites-enabled directory and create a symbolic link from the rt-wui
 
 ````
 cd /etc/nginx/sites-enabled
-sudo ln -s ../sites-available/rt-wui rt-wui
+sudo ln -s ../sites-available/5gmag-rt-wui 5gmag-rt-wui
 sudo rm default
 ````
 
