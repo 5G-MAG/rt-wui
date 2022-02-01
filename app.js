@@ -47,4 +47,6 @@ global.modem_api = ":3010/modem-api/"
 global.mw_api = ":3020/mw-api/"
 
 app.set('port', process.env.PORT || 3000);
-app.listen(app.get('port'));
+app.listen(app.get('port'), function (payload) {
+    console.log(`Listing on port ${app.get('port')}`);
+});
