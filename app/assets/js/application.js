@@ -54,27 +54,6 @@ function stop()
   if (video.hls) video.hls.detachMedia(video);
 }
 
-function autodetectFormat(tmgi)
-{
-  let index = "/index.m3u8";
-  $.get(index)
-    .done( function(data, textStatus, xhr){
-      $("#src-url").val(index);
-      $("#player-select").val("hls");
-      playHls(index);
-    })
-    .fail( function(data, textStatus, xhr){
-      index = uri + "/index.mpd";
-      $.get(index)
-        .done( function(data, textStatus, xhr){
-          $("#src-url").val(index);
-          $("#player-select").val("dash");
-          playDash(index);
-        })
-    });
-}
-
-
 $(function() {
   let vi = $("#video-info");
   let manifest = vi.data("manifest");
