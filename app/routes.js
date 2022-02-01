@@ -6,7 +6,7 @@ const application = require('./controllers/application');
 
 var router = require('express').Router()
 
-router.get('/', function(req, res) { res.redirect("/modem/"); });
+router.get('/', function(req, res) { res.redirect("/modem"); });
 
 router.get('/modem', modem.index);
 router.get('/middleware', middleware.index);
