@@ -27,4 +27,5 @@ router.get('/api/modem/mch_status/:id', modem_api.mch_status);
 
 router.get('/api/mw/files', middleware_api.files);
 router.get('/api/mw/services', middleware_api.services);
+router.get('/api/mw/service_announcement', middleware_api.service_announcement);
 module.exports = router
