@@ -59,9 +59,6 @@ $(function() {
   let manifest = vi.data("manifest");
   let mp = vi.data("player");
   let tmgi = vi.data("tmgi");
-  if (tmgi) {
-    autodetectFormat(tmgi);
-  }
 
   if (manifest && mp) {
     $("#src-url").val(manifest);
@@ -73,6 +70,10 @@ $(function() {
     if (mp == "dash") {
       playDash(manifest);
     }
+  }
+
+  if (tmgi) {
+    autodetectFormat(tmgi);
   }
 
   $("#play-btn").click( function() {
