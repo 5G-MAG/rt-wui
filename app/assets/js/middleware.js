@@ -13,15 +13,22 @@ function poll(){
       let tb = $("#mw-files-tbody");
       tb.empty();
       let total_size = 0;
+      let dashManifestUrl = null;
       for(let file of files) {
         let row = $("<tr>");
         row.append($("<td>").text(file.age));
         row.append($("<td>").text(file.tmgi));
-        row.append($("<td>").html("<a target='_blank' href='/f/" + file.tmgi + "/" + file.location + "'>" + file.location + "</a>"));
+        let requiredSlash = file.location.charAt(0) === '/' ? '' : '/';
+        let url = '/f/' + file.tmgi + requiredSlash + file.location ;
+        row.append($("<td>").html("<a target='_blank' href=" + url + ">" + file.location + "</a>"));
         row.append($("<td>").text(human_file_size(file.content_length)));
         row.append($("<td>").text(file.access_count));
-        tb.append(row);  
+        tb.append(row);
         total_size += file.content_length;
+
+        if(file.location && file.location.indexOf(".mpd") !== -1) {
+            dashManifestUrl = url;
+        }
       }
       $("#total-cache-size").text(human_file_size(total_size) + " total");
 
@@ -51,6 +58,9 @@ function poll(){
           let url = "";
           if (service.stream_type=="FLUTE/UDP") {
             url = "/application?s="+service.stream_tmgi;
+            if(dashManifestUrl) {
+                url += "&m=" + dashManifestUrl + "&p=dash";
+            }
             let stmgi = parseInt(service.stream_tmgi, 16);
             p = $("<p class='mb-0'>").html("Stream TMGI: <strong>0x" + stmgi.toString(16) + "</strong>");
             box.append(p);
