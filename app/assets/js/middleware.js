@@ -1,6 +1,6 @@
 function human_file_size(size) {
-    var i = Math.floor( Math.log(size) / Math.log(1024) );
-    return ( size / Math.pow(1024, i) ).toFixed(2) * 1 + ' ' + ['B', 'kB', 'MB', 'GB', 'TB'][i];
+  var i = Math.floor(Math.log(size) / Math.log(1024));
+  return (size / Math.pow(1024, i)).toFixed(2) * 1 + ' ' + ['B', 'kB', 'MB', 'GB', 'TB'][i];
 };
 
 let sa_supported = undefined
@@ -41,7 +41,7 @@ function read_sa(){
         let valid_until = new Date(item.valid_until * 1000);
         row.append($("<td>").html(valid_from.toLocaleString() + "<br>" + valid_until.toLocaleString()));
         row.append($("<td>").text(item.version));
-        tb.append(row);  
+        tb.append(row);
         let drow = $("<tr class='sa-item-content-row'>");
         let dtd = $("<td class='sa-item-content-cell m-3' colspan=4>");
         let dpre = $("<pre>");
@@ -49,7 +49,7 @@ function read_sa(){
         dpre.append(dcode);
         dtd.append(dpre);
         drow.append(dtd);
-        tb.append(drow);  
+        tb.append(drow);
       }
       sa_id = sa.id;
       Prism.highlightAll();
@@ -107,7 +107,7 @@ function poll(){
             t.append(st);
             s.find(".service-titles").append(t);
           }
-          s.find(".ser-play-link").attr("href", 
+          s.find(".ser-play-link").attr("href",
             "application?p=" + service.protocol + "&m=" + encodeURIComponent("/"+service.manifest_path));
 
           for (let st of service.streams) {
@@ -122,7 +122,7 @@ function poll(){
             ss.find(".ser-stream-resolution").text(st.resolution);
             ss.find(".ser-stream-rate").text(st.frame_rate);
             ss.find(".ser-stream-codecs").text(st.codecs);
-            ss.find(".ser-stream-play-link").attr("href", 
+            ss.find(".ser-stream-play-link").attr("href",
               "application?p=" + service.protocol + "&m=" + encodeURIComponent("/"+st.playlist_path));
 
             s.find(".service-streams").append(ss);
