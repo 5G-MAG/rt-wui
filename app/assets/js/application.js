@@ -45,6 +45,11 @@ function playDash(manifest_url)
   video.muted = true;
   video.dash = dashjs.MediaPlayer().create();
   video.dash.initialize(video, manifest_url, true);
+  video.dash.updateSettings({
+    debug: {
+      logLevel: 4
+    }
+  })
 }
 
 function stop()
