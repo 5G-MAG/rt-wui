@@ -33,3 +33,6 @@ exports.files = async(function*(req, res) {
 exports.services = async(function*(req, res) {
   proxy_call(req, res, "/mw-api/services");
 });
+exports.service_announcement = async(function*(req, res) {
+  proxy_call(req, res, "/mw-api/service_announcement");
+});

@@ -3,6 +3,7 @@ const express = require('express'),
   routes = require('./app/routes'),
   cors = require('cors'),
   bodyParser = require('body-parser'),
+  sassMiddleware = require('@gompa/node-sass-middleware'),
   app = express();
 
 app.use(expressLayouts);
@@ -13,6 +14,13 @@ app.use(bodyParser.urlencoded({
     extended: true
 }));
 app.use(bodyParser.json());
+app.use(
+  sassMiddleware({
+    src: __dirname + '/app/assets',
+    dest: __dirname + '/public',
+    debug: true 
+  })
+);
 app.use(cors());
 
 app.use(express.static(__dirname + '/node_modules/bootstrap/dist'));
@@ -22,6 +30,8 @@ app.use(express.static(__dirname + '/node_modules/dashjs/dist'));
 app.use(express.static(__dirname + '/node_modules/player-chrome/dist/components'));
 app.use(express.static(__dirname + '/app/assets'));
 app.use(express.static(__dirname + '/public'));
+app.use("/fa", express.static( __dirname + '/node_modules/@fortawesome/fontawesome-free'));
+app.use("/prism", express.static( __dirname + '/node_modules/prismjs'));
 app.use(routes);
 
 const
@@ -37,4 +47,6 @@ global.modem_api = ":3010/modem-api/"
 global.mw_api = ":3020/mw-api/"
 
 app.set('port', process.env.PORT || 3000);
-app.listen(app.get('port'));
+app.listen(app.get('port'), function (payload) {
+    console.log(`Listing on port ${app.get('port')}`);
+});

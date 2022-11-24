@@ -1,27 +1,31 @@
 {
   "name": "rt-wui",
-  "version": "0.0.11",
+  "version": "0.1.0",
   "description": "Shared web interface for the 5G-MAG processes: modem and middleware",
   "main": "app.js",
   "dependencies": {
-    "@popperjs/core": "^2.9.2",
+    "@fortawesome/fontawesome-free": "^5.15.4",
+    "@gompa/node-sass-middleware": "^0.12.0",
+    "@popperjs/core": "^2.10.2",
     "bootstrap": "^4.6.0",
     "co": "^4.6.0",
     "cors": "^2.8.5",
-    "dashjs": "^4.4.0",
+    "dashjs": "^4.5.1",
     "ejs": "^3.1.6",
     "express": "^4.17.1",
-    "express-ejs-layouts": "^2.5.0",
-    "hls.js": "^1.0.2",
+    "express-ejs-layouts": "^2.5.1",
+    "hls.js": "^1.0.11",
     "jquery": "^3.6.0",
     "node-os-utils": "^1.3.5",
     "node-sass": "^6.0.1",
     "player-chrome": "0.0.3",
+    "prismjs": "^1.25.0",
     "trim-newlines": "^3.0.1"
   },
   "devDependencies": {},
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node app.js"
   },
   "repository": {
     "type": "git",
