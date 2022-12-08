@@ -123,10 +123,8 @@ function updateMchButtons() {
 }
 
 function poll(){
-  let modem_present = false;
   $.get("/api/modem/status")
     .done( function(data, textStatus, xhr){
-      modem_present = true;
       const d = JSON.parse(data);
       $("#sync-status").html(d["state"]);
       $("#sync-cfo").html((Number.parseFloat(d["cfo"])/1000.0).toFixed(3));

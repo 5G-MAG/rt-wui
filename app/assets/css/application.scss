@@ -2,8 +2,14 @@
 @import "../../../node_modules/bootstrap/scss/variables";
 @import "../../../node_modules/bootstrap/scss/mixins";
 
+$fa-font-path: "../fa/webfonts";
+@import "../../../node_modules/@fortawesome/fontawesome-free/scss/fontawesome.scss";
+@import "../../../node_modules/@fortawesome/fontawesome-free/scss/solid.scss";
+
 $body-bg: #222;
 $body-color: #fff; 
+$nav-tabs-link-active-bg: $body-bg;
+$nav-tabs-link-active-color: #fff;
 
 @import "../../../node_modules/bootstrap/scss/bootstrap";
 @import "dashboard" 
