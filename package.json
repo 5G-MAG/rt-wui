@@ -1,6 +1,6 @@
 {
   "name": "rt-wui",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Shared web interface for the 5G-MAG processes: modem and middleware",
   "main": "app.js",
   "dependencies": {
