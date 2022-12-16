@@ -4,7 +4,7 @@ After=network.target
 
 [Service]
 Type=simple
-User=ofr
+User=fivegmag-rt
 ExecStart=/usr/bin/node /home/user-name/rt-wui/app.js
 Restart=on-failure
 
