@@ -58,7 +58,7 @@ node app.js
 ````
 
 You can access the *rt-wui* interface through the nginx server on port 80 in your browser: `` http://<ip address> ``. If *rt-modem* is running.
-Click [here](https://github.com/5G-MAG/rt-wui/edit/development/README.md#running-example) for an
+Click [here](https://github.com/5G-MAG/rt-wui/main/README.md#running-example) for an
 example screenshot.
 
 ### Background process (**recommended**)
