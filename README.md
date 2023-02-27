@@ -58,7 +58,7 @@ node app.js
 ````
 
 You can access the *rt-wui* interface through the nginx server on port 80 in your browser: `` http://<ip address> ``. If *rt-modem* is running.
-Click [here](https://github.com/5G-MAG/Documentation-and-Architecture/blob/main/media/wiki/Webiface_rp.PNG) for an
+Click [here](https://github.com/5G-MAG/rt-wui/edit/development/README.md#running-example) for an
 example screenshot.
 
 ### Background process (**recommended**)
@@ -135,3 +135,6 @@ webinterface:
 |  `` systemctl status rt-wui.service `` | Show process status |
 |  `` systemctl disable rt-wui.service `` | Disable autostart, *rt-wui* will no be started after reboot |
 |  `` systemctl enable rt-wui.service `` | Enable autostart, *rt-wui* will be started automatically after reboot |
+
+### Running example
+![Architecture](https://github.com/5G-MAG/Documentation-and-Architecture/blob/main/media/wiki/Webiface_rp.PNG)
