@@ -4,8 +4,11 @@ This repository holds the Web User Interface for the MBMS Modem, MBMS Middleware
 
 ## Introduction
 
-The 5G-MAG Reference Tools Webinterface (rt-wui) provides an optional graphical webinterface with a control display for each 5G-MAG Reference Tools process (MBMS Modem, MBMS Middleware, Application). Its main purpose is to collect and display useful information from the MBMS Modem, MBMS Middleware and Application Process. It also enables use cases where the 5G-MAG Reference Tools can be used for simple measurements (e.g., mobile measurements) or as a standalone device (e.g., set-top box, mobile phone/tablet showcase). The *rt-wui* consists of three
-tabs, one for each process. Data from the processes are collected using their respective RestAPI.
+The 5G-MAG Reference Tools Webinterface (rt-wui) provides an optional graphical webinterface with a control display for each 5G-MAG Reference Tools process (MBMS Modem, MBMS Middleware, Application). Its main purpose is to collect and display useful information from the MBMS Modem, MBMS Middleware and Application Process. It also enables use cases where the 5G-MAG Reference Tools can be used for simple measurements (e.g., mobile measurements) or as a standalone device (e.g., set-top box, mobile phone/tablet showcase).
+
+### About the implementation
+
+The *rt-wui* consists of three tabs, one for each process. Data from the processes are collected using their respective RestAPI.
 
 ![Architecture](https://github.com/5G-MAG/Documentation-and-Architecture/blob/main/media/architecture/5G-MAG%20RT%20Architecture%20Current%20Architecture%205G%20Media%20Client%20v8.drawio.png)
 
@@ -138,7 +141,6 @@ webinterface:
 
 ### Running example
 ![Architecture](https://github.com/5G-MAG/Documentation-and-Architecture/blob/main/media/wiki/Webiface_rp.PNG)
-
 
 ## Docker Implementation
 
