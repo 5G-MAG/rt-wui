@@ -1,4 +1,4 @@
-# 5G-MAG Reference Tools: Web User Interface for MBMS Modem, MBMS Middleware and Application.
+# Web User Interface for MBMS Modem, MBMS Middleware and Application.
 
 This repository holds the Web User Interface for the MBMS Modem, MBMS Middleware and Applicaiton within the 5G-MAG Reference Tools.
 
