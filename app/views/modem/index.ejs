@@ -1,5 +1,7 @@
-<div class="row m-3">
-  <div class="col-lg-4">
+<div class="row no-gutters m-3">
+
+  <div class="col-lg-2">
+  <div class="panel panel-default store-wrapper">
     <div class="box pb-2">
       <div class="box-title">
         SDR
@@ -8,12 +10,12 @@
         <tbody>
           <tr>
             <td>Frequency</td>
-            <td class="pr-3"><input id="sdr-freq" class="text-right" type="number" step="0.1"></td>
+            <td class="pr-3"><input id="sdr-freq" class="text-right" type="number" step="0.1" min="70"></td>
             <td>MHz</td>
           </tr>
           <tr>
             <td>Gain</td>
-            <td class="pr-3"><input id="sdr-gain" class="text-right" type="number" step="1"/></td>
+            <td class="pr-3"><input id="sdr-gain" class="text-right" type="number" step="1" min="0"/></td>
             <td>dB</td>
           </tr>
           <tr>
@@ -32,10 +34,151 @@
             <td>MHz</td>
           </tr>
           <tr>
-            <td>Buffer Level</td>
+            <td title="The receiver buffers the samples from the SDR in a circular buffer, if you see that the buffer fills completly, change the size of the buffer to a greater value, this also increase the latency of the received singal. If the buffer is completly full the incoming sample will be discarted, i.e. overflow.">Buffer Level</td>
             <td colspan="2" class="pr-3 text-right">
               <div class="progress">
                 <div class="progress-bar" role="progressbar" id="sdr-bufferlevel"></div>
+              </div>
+            </td>
+          </tr>
+          <tr data-toggle="collapse" data-target="#advanced-opts" class="accordion-toggle">
+            <td class="pr-3 text-left val" colspan="3" title="Advanced options, here you can change the parameters and configuration of the receiver. If you don't know what are you doing, the best option is to use the default values.">Advanced options ⬇.<button type"button" class="btn btn-default"><i class="fa fa-start"></i></button></td>
+          </tr>
+          <tr>
+            <td class="hiddenRow" colspan="3" >
+              <div id="advanced-opts" class="accordian-body collapse"> 
+                <table class="params-table">
+                  <tbody>
+                    <tr>
+                      <td class="pr-3 text-left val" colspan="3" title="Channel estimation parameters for the CAS processor. This controls what algorithms to use to estimate the physical layers magnitudes, values, etc...">CAS channel est. parameters</td>
+                    </tr>
+                    <tr>
+                      <td class="pl-2 text-left val" colspan="3" title="In order to know the SNR the receiver needs to estimate the noise power from the received signal, there's three available methods">Estimation algorithm of noise</td>
+                    </tr>
+                    <tr>
+                      <td class="form-check"> <label class="form-check-label" for="noise-alg-pss" title="Uses the channel estimates from the reference signals to compute the diference between the received PSS and the PSS it would recieved based on the estimated channel">PSS</label></td>
+                      <td class="pr-3 text-right val" id="pss"></td>
+                      <td><input class="form-check-input-reverse" type="radio" name="noise-alg-opt" id="noise-alg-pss" value="1" checked></td>
+                    </tr>
+                    <tr>
+                      <td class="form-check"> <label class="form-check-label" for="noise-alg-empty" title="Computes the noise power from the guard RE near to the PSS and SSS signals. This RE don't carry any information i.e. only noise">Empty</label></td>
+                      <td class="pr-3 text-right val" id="empty"></td>
+                      <td><input class="form-check-input-reverse" type="radio" name="noise-alg-opt" id="noise-alg-empty" value="2"></td>
+                    </tr>
+                    <tr>
+                      <td class="form-check"> <label class="form-check-label" for="noise-alg-refs" title="Computes the noise power from the difference between the channel estimates and its average version">Refs</label></td>
+                      <td class="pr-3 text-right val" id="refs"></td>
+                      <td><input class="form-check-input-reverse" type="radio" name="noise-alg-opt" id="noise-alg-refs" value="0"></td>
+                    </tr>
+                    <tr>
+                      <td class="pl-2 form-check val"> <label class="form-check-label" for="noise-alg-refs" title="Corrects the residual CFO using the reference symbols from various OFDM symbols of the same subframe.">Sync error</label></td>
+                      <td class="pr-3 text-right val" id="sync"></td>
+                      <td><input class="form-check-input-reverse" type="checkbox" " id="chest-cfg-sync-error"></td>
+                    </tr>
+                    <tr>
+                      <td class="pl-2 text-left val" colspan="3" title="In order to get a channel estimation in all of the RE the receiver needs to complete it from the channel estimated at the reference signals. Here we can select what method we used to get the rest of the channel estimates.">Estimator</td>
+                    </tr>
+                    <tr>
+                      <td class="form-check"> <label class="form-check-label" for="estimator-alg-average" title="Does an average using all of the four OFDM symbols carrying reference signals.">Average</label></td>
+                      <td class="pr-3 text-right val" id="average"></td>
+                      <td><input class="form-check-input-reverse" type="radio" name="estimator-alg-opt" id="estimator-alg-average" value="0" checked></td>
+                    </tr>
+                    <tr>
+                      <td class="form-check"> <label class="form-check-label" for="estimator-alg-interpolate" title="Interpolate all of the missing RE from the reference signals estimates.">Interpolate</label></td>
+                      <td class="pr-3 text-right val" id="interpolate"></td>
+                      <td><input class="form-check-input-reverse" type="radio" name="estimator-alg-opt" id="estimator-alg-interpolate" value="1"></td>
+                    </tr>
+                    <tr>
+                      <td class="pl-2 text-left val" colspan="3" title="Filter for the channel estimates to reduce the effect of the noise variance.">Filter type</td>
+                    </tr>
+                    <tr>
+                      <td class="form-check"> <label class="form-check-label" for="filter-type-gauss" title="It's defined by a filter order and a filter coefficient">Gaussian</label></td>
+                      <td class="pr-3 text-right val" id="gauss"></td>
+                      <td><input class="form-check-input-reverse" type="radio" name="filter-type" id="filter-type-gauss" value="0" checked></td>
+                    </tr>
+                    <tr>
+                      <td class="form-check"> <label class="form-check-label" for="filter-type-triangle" title="In this one only the filter order is needed">Triangle</label></td>
+                      <td class="pr-3 text-right val" id="triangle"></td>
+                      <td><input class="form-check-input-reverse" type="radio" name="filter-type" id="filter-type-triangle" value="1"></td>
+                    </tr>
+                    <tr>
+                      <td class="form-check"> <label class="form-check-label" for="filter-type-none" title="Don't apply any filtering to the channel estimates">None</label></td>
+                      <td class="pr-3 text-right val" id="none"></td>
+                      <td><input class="form-check-input-reverse" type="radio" name="filter-type" id="filter-type-none" value="2"></td>
+                    </tr>
+                    <tr>
+                      <td class="pl-4">Filter order</td>
+                      <td class="pr-3"><input id="filter-order" class="text-right" type="number" step="1" min="0"></td>
+                      <td></td>
+                    </tr>
+                    <tr>
+                      <td class="pl-4">Filter coefficient</td>
+                      <td class="pr-3"><input id="filter-coef" class="text-right" type="number" step="0.01" min="0.01"></td>
+                      <td></td>
+                    </tr>
+                    <tr>
+                      <td class="pb-3" colspan="3"></td>
+                    </tr>
+                    <tr>
+                      <td class="pr-3 text-left val" colspan="3" title="Configuration parameters related to the physical layer procedures, i.e. synchronization in time with the signal, estimation of channel effects as CFO, SFO, etc.">PHY parameters</td>
+                    </tr>
+                    <tr>
+                      <td class="pl-2 form-check" colspan="3"> <label class="form-check-label" for="cfo-est-pss-find" colspan="3" title="Enables the estimation of the CFO in the finding synchroniztion stage"">CFO estimation from PSS in find stage.</label></td>
+                      <td class="pr-3 text-right val" id="cfo-pss"></td>
+                      <td><input class="form-check-input-reverse" type="checkbox" " id="cfo-est-pss-find"></td>
+                    </tr>
+                    <tr>
+                      <td class="pl-2 form-check" colspan="3"> <label class="form-check-label" for="cfo-est-pss-track" colspan="3" title="Enables the estimation of the CFO in the tracking synchronization stage">CFO estimation from PSS in track stage.</label></td>
+                      <td class="pr-3 text-right val" id="cfo-pss"></td>
+                      <td><input class="form-check-input-reverse" type="checkbox" " id="cfo-est-pss-track"></td>
+                    </tr>
+                    <tr>
+                      <td class="pl-2 form-check" colspan="3"> <label class="form-check-label" for="cfo-correct-find" colspan="3" title="Enables the correction of the CFO while finding synchronization.">CFO correction in find stage.</label></td>
+                      <td class="pr-3 text-right val" id="cfo-correct"></td>
+                      <td><input class="form-check-input-reverse" type="checkbox" " id="cfo-correct-find"></td>
+                    </tr>
+                    <tr>
+                      <td class="pl-2 form-check" colspan="3"> <label class="form-check-label" for="cfo-correct-track" colspan="3" title="Enables the correction of the CFO while tracking the synchronization">CFO correction in track stage.</label></td>
+                      <td class="pr-3 text-right val" id="cfo-correct"></td>
+                      <td><input class="form-check-input-reverse" type="checkbox" " id="cfo-correct-track"></td>
+                    </tr>
+                    <tr>
+                      <td class="pl-2" title="Controls how much weight has the previous estimation in the actual value. 0 means nothing, 1 means that the 100% af the previous estimated CFO is added to the new estimation, averaging this way the variability of the estimation.">BW loopback CFO PSS</td>
+                      <td class="pr-3"><input id="cfo-pss-loop-bw" class="text-right" type="number" step="0.01" min="0.01"></td>
+                      <td></td>
+                    </tr>
+                    <tr>
+                      <td class="pl-2">CFO EMA Alpha find</td>
+                      <td class="pr-3"><input id="cfo-ema-alpha-find" class="text-right" type="number" step="0.01" min="0.01"></td>
+                      <td></td>
+                    </tr>
+                    <tr>
+                      <td class="pl-2">CFO EMA Alpha track</td>
+                      <td class="pr-3"><input id="cfo-ema-alpha-track" class="text-right" type="number" step="0.01" min="0.01"></td>
+                      <td></td>
+                    </tr>
+                    <tr>
+                      <td class="pl-2">PSS corr EMA Alpha find</td>
+                      <td class="pr-3"><input id="pss-ema-find" class="text-right" type="number" step="0.01" min="0.01"></td>
+                      <td></td>
+                    </tr>
+                    <tr>
+                      <td class="pl-2">PSS corr EMA Alpha track</td>
+                      <td class="pr-3"><input id="pss-ema-track" class="text-right" type="number" step="0.01" min="0.01"></td>
+                      <td></td>
+                    </tr>
+                     <tr>
+                      <td class="pl-2">Peak threshold find</td>
+                      <td class="pr-3"><input id="threshold-find" class="text-right" type="number" step="0.01" min="0.01"></td>
+                      <td></td>
+                    </tr>
+                    <tr>
+                      <td class="pl-2" title="Value of the correlation peak above we consider to be synced while tracking the synchronism of the signal">Peak threshold track</td>
+                      <td class="pr-3"><input id="threshold-track" class="text-right" type="number" step="0.01" min="0.01"></td>
+                      <td></td>
+                    </tr>
+                  </tbody>
+                </table>
               </div>
             </td>
           </tr>
@@ -62,7 +205,7 @@
             <td></td>
           </tr>
           <tr>
-            <td>CFO</td>
+            <td title="Carrier frequency offset. This magnitude measure how far is the recieved carrier from it's original carrier frequency. This displacement can be originated by Doppler effect, and mainly by the clock precision of the used SDR.">CFO</td>
             <td class="pr-3 text-right val" id="sync-cfo"></td>
             <td>kHz</td>
           </tr>
@@ -72,17 +215,17 @@
             <td></td>
           </tr>
           <tr>
-            <td>PRB</td>
+            <td title="Physical resource blocks, 180 kHz each.">PRB</td>
             <td class="pr-3 text-right val" id="sync-prb"></td>
             <td></td>
           </tr>
           <tr>
-            <td>Width</td>
+            <td title="Bandwidth of the received signal" >Width</td>
             <td class="pr-3 text-right val" id="sync-width"></td>
             <td>MHz</td>
           </tr>
           <tr>
-            <td>Subcarrier Spacing</td>
+            <td>Subcarrier spacing</td>
             <td class="pr-3 text-right val" id="sync-scs"></td>
             <td>kHz</td>
           </tr>
@@ -95,7 +238,12 @@
       </table>
     </div>
   </div>
-  <div class="col-lg-4">
+  </div>
+
+<div class="col-lg-10 panel panel-default store-wrapper">
+<div class="row  no-gutters ">
+ 
+  <div class="col-lg-3">
     <div class="box pb-2">
       <div class="box-title">
         PDSCH
@@ -136,7 +284,7 @@
       </table>
     </div>
   </div>
-  <div class="col-lg-4">
+  <div class="col-lg-3">
     <div class="box pb-2">
       <div class="box-title">
         PMCH
@@ -174,6 +322,18 @@
       </table>
     </div>
   </div>
+  <div class="col-lg-12">
+    <div class="box pb-2">
+      <div class="box-title">
+        Graph
+      </div>
+      <div class="box-subtitle">
+        Plot
+      </div>
+      <canvas height="500" id="graph" style="width:100%" ></canvas>
+    </div>
+  </div>
+</div>
 </div>
 
 <script language="javascript" src="js/modem.js"></script>

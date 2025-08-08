@@ -30,6 +30,9 @@ function proxy_call(req, res, path) {
 exports.sdr_params = async(function*(req, res) {
   proxy_call(req, res, "/modem-api/sdr_params");
 });
+exports.chest_cfg_params = async(function*(req, res) {
+  proxy_call(req, res, "/modem-api/chest_cfg_params");
+});
 exports.status = async(function*(req, res) {
   proxy_call(req, res, "/modem-api/status");
 });
