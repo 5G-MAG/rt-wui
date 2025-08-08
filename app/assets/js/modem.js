@@ -148,13 +148,6 @@ function clear_constellation_values(canvas_id) {
 function plot_graph(canvas_id, status_rx, snr, snr_avg, bler) {
   const canvas = document.getElementById(canvas_id);
   const ctx = canvas.getContext("2d");
-  //canvas.width = canvas.parentElement.clientWidth;
-//  ctx.beginPath();
-//  ctx.moveTo(0.5, canvas.height/2 - 0.5);
-//  ctx.lineTo(canvas.width - 0.5, canvas.height/2 - 0.5);
-//  ctx.moveTo(canvas.width/2 - 0.5, 0.5);
-//  ctx.lineTo(canvas.width/2 - 0.5, canvas.height);
-//  ctx.stroke(); // Draw it
 
   // for snr
   const m_snr = (canvas.height * 0.8)/50;
@@ -170,7 +163,6 @@ var imageData = ctx.getImageData(1, 0, canvas.parentElement.clientWidth - right_
   ctx.lineWidth = 1;
   ctx.strokeStyle = "#00CC00";
   ctx.fillStyle = "#00CC00";
-  //  ctx.clearRect( 0, 0, canvas.width, canvas.height );
   ctx.putImageData(imageData, 0, 0);
   var y;
   var value = -b_snr/10;
@@ -202,12 +194,9 @@ var imageData = ctx.getImageData(1, 0, canvas.parentElement.clientWidth - right_
       }
       ctx.strokeStyle = "#999999";
       ctx.fillStyle = "#999999";
-      //ctx.moveTo(0, y);
-      //ctx.lineTo(canvas.width - 25, y);
       ctx.fillRect(canvas.width- right_margin,
         y - 1, // Instantaneous snr
         2,2);
-      //ctx.stroke();
       bler_value += 1;
     }
     value++;
@@ -220,10 +209,7 @@ var imageData = ctx.getImageData(1, 0, canvas.parentElement.clientWidth - right_
     ctx.font = "12px sans-serif";
 
   };
-/*  ctx.globalCompositeOperation = "copy";
-  ctx.drawImage(canvas,-1, 0);
-  // reset back to normal for subsequent operations.
-  ctx.globalCompositeOperation = "source-over"*/
+
   console.log("Status " + status_rx);
   if (!status_rx.localeCompare("synchronized")) {
   console.log("SNR " + snr);
@@ -285,11 +271,6 @@ function clear_all() {
   $("#pdsch-ber").html("-");
   $("#pdsch-bler").html("-");
   clear_ce_values("sdr-carriers");
-  
-
-
-
-
   clear_constellation_values("pdsch-constellation");
   clear_constellation_values("mcch-constellation");
   clear_constellation_values("mch-constellation");
@@ -321,7 +302,6 @@ function poll(){
 
       if (!window.started && d["state"].localeCompare("Not running") ) {
         window.started = 1;
-        //clear_all();
         clear_cir_values("graph");
       }
       $("#sync-cfo").html((Number.parseFloat(d["cfo"])/1000.0).toFixed(3));
@@ -374,7 +354,6 @@ function poll(){
         $("#threshold-track").val(Number.parseFloat(d["threshold_track"]).toFixed(2));
       }
 
-
       $.get("/api/modem/sdr_params", function(data){
         const d = JSON.parse(data);
         if (!$("#sdr-freq").is(":focus")) {
@@ -389,7 +368,6 @@ function poll(){
         $("#sdr-filter-bw").html((Number.parseFloat(d["filter_bw"])/1000000).toFixed(2));
         $("#sdr-bufferlevel").width((Number.parseFloat(d["buffer_level"])*100).toString()+"%");
       }); 
-
 
       $.get("/api/modem/mch_info", function(data){
         if (window.mch_info && window.mch_info == data) {
@@ -445,10 +423,6 @@ function poll(){
       }); 
 
       load_ce_values("sdr-carriers");
-      
-
-
-
       load_constellation_values("pdsch-constellation", "/api/modem/pdsch_data");
       load_constellation_values("mcch-constellation", "/api/modem/mcch_data");
       load_constellation_values("mch-constellation", "/api/modem/mch_data/" + window.selected_mch);
