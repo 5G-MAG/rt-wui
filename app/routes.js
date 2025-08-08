@@ -18,12 +18,6 @@ router.get('/api/modem/chest_cfg_params', modem_api.chest_cfg_params);
 router.put('/api/modem/chest_cfg_params', modem_api.chest_cfg_params);
 router.get('/api/modem/status', modem_api.status);
 router.get('/api/modem/ce_values', modem_api.ce_values);
-
-
-
-
-
-
 router.get('/api/modem/pdsch_data', modem_api.pdsch_data);
 router.get('/api/modem/pdsch_status', modem_api.pdsch_status);
 router.get('/api/modem/mcch_data', modem_api.mcch_data);
