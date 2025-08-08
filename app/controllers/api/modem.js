@@ -39,20 +39,6 @@ exports.status = async(function*(req, res) {
 exports.ce_values = async(function*(req, res) {
   proxy_call(req, res, "/modem-api/ce_values");
 });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 exports.pdsch_data = async(function*(req, res) {
   proxy_call(req, res, "/modem-api/pdsch_data");
 });
