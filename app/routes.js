@@ -7,11 +7,9 @@ const application = require('./controllers/application');
 var router = require('express').Router()
 
 router.get('/', function(req, res) { res.redirect("/modem"); });
-
 router.get('/modem', modem.index);
 router.get('/middleware', middleware.index);
 router.get('/application', application.index);
-
 router.get('/api/modem/sdr_params', modem_api.sdr_params);
 router.put('/api/modem/sdr_params', modem_api.sdr_params);
 router.get('/api/modem/chest_cfg_params', modem_api.chest_cfg_params);
@@ -25,8 +23,6 @@ router.get('/api/modem/mcch_status', modem_api.mcch_status);
 router.get('/api/modem/mch_info', modem_api.mch_info);
 router.get('/api/modem/mch_data/:id', modem_api.mch_data);
 router.get('/api/modem/mch_status/:id', modem_api.mch_status);
-
-
 router.get('/api/mw/files', middleware_api.files);
 router.get('/api/mw/services', middleware_api.services);
 router.get('/api/mw/service_announcement', middleware_api.service_announcement);
